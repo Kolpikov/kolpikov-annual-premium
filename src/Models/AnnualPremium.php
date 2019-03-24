@@ -36,4 +36,12 @@ class AnnualPremium extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    protected function gender(): BelongsTo
+    {
+        return $this->belongsTo(Gender::class);
+    }
 }
