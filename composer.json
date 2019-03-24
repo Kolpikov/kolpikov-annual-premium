@@ -1,0 +1,39 @@
+{
+    "name": "kolpikov/annual-premium",
+    "description": "Library for fetching Annual Premium data",
+    "type": "library",
+    "require": {
+        "php" : ">=7.1",
+        "ext-json": "*",
+        "ammadeuss/laravel-html-dom-parser": "^1.1",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8",
+        "mockery/mockery": "^1.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Kolpikov",
+            "email": "kolpikov.andrey@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kolpikov\\AnnualPremium\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kolpikov\\AnnualPremium\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kolpikov\\AnnualPremium\\AnnualPremiumServiceProvider"
+            ]
+        }
+    }
+}
