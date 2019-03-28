@@ -1,33 +1,22 @@
 <?php
 
-namespace Kolpikov\AnnualPremium\Models;
+namespace Kolpikov\AnnualPremium\Models\Views;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Kolpikov\AnnualPremium\Models\Gender;
 
 /**
  * Class AnnualPremium
- * @package Kolpikov\AnnualPremium\Models
+ * @package Kolpikov\AnnualPremium\Models\Views
  */
 class AnnualPremium extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'annual_premiums';
-
-    /**
-     * @var array
-     */
-    protected $fillable = [
-        'state_id',
-        'gender_id',
-        'zipcode',
-        'min_ann_prem',
-        'max_ann_prem',
-        'age',
-        'name',
-    ];
+    protected $table = 'annual_premiums_view';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -43,5 +32,14 @@ class AnnualPremium extends Model
     protected function gender(): BelongsTo
     {
         return $this->belongsTo(Gender::class);
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRates(Builder $query): Builder
+    {
+        return $query->orderBy('gender_id');
     }
 }
