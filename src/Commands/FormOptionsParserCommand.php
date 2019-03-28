@@ -53,9 +53,20 @@ class FormOptionsParserCommand extends Command
     {
         if (isset($options['states'])) {
             foreach ($options['states'] as $option) {
-                $this->tryToSaveState($option);
+                if ($this->isValidState($option)) {
+                    $this->tryToSaveState($option);
+                }
             }
         }
+    }
+
+    /**
+     * @param array $item
+     * @return bool
+     */
+    protected function isValidState(array $item): bool
+    {
+        return app('premiumValidator')->driver('state')->isValid($item);
     }
 
     /**
@@ -75,9 +86,20 @@ class FormOptionsParserCommand extends Command
     {
         if (isset($options['genders'])) {
             foreach ($options['genders'] as $option) {
-                $this->tryToSaveGender($option);
+                if ($this->isValidGender($option)) {
+                    $this->tryToSaveGender($option);
+                }
             }
         }
+    }
+
+    /**
+     * @param array $item
+     * @return bool
+     */
+    protected function isValidGender(array $item): bool
+    {
+        return app('premiumValidator')->driver('gender')->isValid($item);
     }
 
     /**

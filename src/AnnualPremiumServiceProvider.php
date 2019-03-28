@@ -3,6 +3,7 @@
 namespace Kolpikov\AnnualPremium;
 
 use Illuminate\Support\ServiceProvider;
+use Kolpikov\AnnualPremium\Validators\PremiumValidatorManager;
 
 /**
  * Class AnnualPremiumServiceProvider
@@ -27,6 +28,10 @@ class AnnualPremiumServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/annualpremium.php', 'annualpremium');
+
+        $this->app->singleton('premiumValidator', function ($app) {
+            return new PremiumValidatorManager($app);
+        });
 
         $this->app->bind(
             'Kolpikov\AnnualPremium\Contracts\ClientInterface',

@@ -44,8 +44,19 @@ class AnnualPremiumParserCommand extends Command
     protected function saveResults(array $items): void
     {
         foreach ($items as $item) {
-            $this->tryToSaveItem($item);
+            if ($this->isValid($item)) {
+                $this->tryToSaveItem($item);
+            }
         }
+    }
+
+    /**
+     * @param array $item
+     * @return bool
+     */
+    protected function isValid(array $item): bool
+    {
+        return app('premiumValidator')->driver('premium')->isValid($item);
     }
 
     /**
